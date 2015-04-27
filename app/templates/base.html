@@ -1,0 +1,19 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - ubc</title>
+    {% else %}
+    <title>Welcome to ubc</title>
+    {% endif %}
+
+    <script src="/static/js/jquery.js"></script>
+
+    <script src="/static/js/request_ubc.js"></script>
+    
+  </head>
+  <body>
+    <div>ubc: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>

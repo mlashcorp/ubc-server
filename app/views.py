@@ -3,15 +3,52 @@ from werkzeug.utils import secure_filename
 from app import app
 import os
 
+
+assay_id_counter = 0
+
+@app.route("/request_assay")
+def request_assay():    
+    global assay_id_counter
+    assay_id_counter += 1
+    return str(assay_id_counter)
+
+
+@app.route("/start_assay")
+def start_assay():
+    return render_template("start_assay.html")
+
+# Non-visible 
+@app.route("/query_assay")
+def query_assay():
+    processed_frames = 20
+    total_frames = 1200
+    progress = (float(processed_frames) / float(total_frames))
+
+    ## Fake: simulates progress change
+    print progress
+    processed_frames += 10
+
+    return str(progress)
+
+# Non-visible
+@app.route("/cancel_assay")
+def cancel_assay():
+    cancel_state = 0
+    return str(cancel_state)
+
 @app.route("/upload_file", methods=['GET', 'POST'])
 def upload_file():
+
+    def create_upload_filename(machine_id, user_id, assay_id, filename):
+        return secure_filename(machine_id) + "__" + secure_filename(user_id) + "__" + secure_filename(assay_id) + "__" + secure_filename(filename)
+
     upload = request.files['upload']
 
     machine_id = request.form["machine_id"]
     user_id = request.form["user_id"]
     assay_id = request.form["assay_id"]
 
-    filename = secure_filename(upload.filename)
+    filename = create_upload_filename(machine_id, user_id, assay_id, upload.filename)
 
     upload.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
