@@ -17,18 +17,22 @@ def request_assay():
 def start_assay():
     return render_template("start_assay.html")
 
+@app.route("/view_assay")
+def view_assay():
+    return render_template("view_assay.html")
+
 # Non-visible 
+processed_frames = 20
 @app.route("/query_assay")
 def query_assay():
-    processed_frames = 20
-    total_frames = 1200
-    progress = (float(processed_frames) / float(total_frames))
+    global processed_frames
+    total_frames = 10200
+    progress = round(float(processed_frames) / float(total_frames), 3)
 
     ## Fake: simulates progress change
-    print progress
     processed_frames += 10
 
-    return str(progress)
+    return str(progress*100)
 
 # Non-visible
 @app.route("/cancel_assay")

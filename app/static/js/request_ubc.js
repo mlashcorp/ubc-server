@@ -3,52 +3,54 @@ $( document ).ready(function() {
     //alert("READY!");
 });
 
+var machine_id = "mach1";
+var user_id = "user123";
+
+
 var assay_id = 0; // Unitialized assay_id.
 
 function monitor_assay() {
-    var machine_id = "mach1";
-    var user_id = "user123";
-
-    var assay_finished = false;
-
-
-    $.get( "http://localhost:5000/query_assay", { machine_id: machine_id, user_id : user_id })
+    $.get( "/query_assay", { machine_id: machine_id, user_id : user_id })
         .done(function(data) {
-            alert("Received progress data" + data);
+            //alert("Received progress data " + data);
 
-            if (float(data) > 1) {
-                alert("Finished :D");
+            var progress = parseFloat(data);
+
+            if (progress > 100.0) {
+                alert("Finished :D");                
+                window.location = "/view_assay";
             }
             else {
-                $("#RunnindAssayProgressDiv").html("<p>"+data+"</p>");
-                setTimeout(monitor_assay(), 1000);
+                $("#RunnindAssayProgressDiv").html("<p> Please wait...  "+progress+"%</p>");
+                setTimeout(monitor_assay(), 10000);
             }
         });
-
 }
 
 function request_ubc_assay() {
-    $.get( "http://localhost:5000/request_assay", function( data ) {
+    $.get( "/request_assay", function( data ) {
         alert( "Assay start requested! Received assay_id = " + data );
-        assay_id = data;        
+        assay_id = parseInt(data);        
 
         $("#StartAssayDiv")[0].style.visibility = "hidden";
 
         if (assay_id > 0) {
             $("#RunningAssayDiv")[0].style.visibility = "visible";
-            setTimeout(monitor_assay(), 1000);
+            monitor_assay();
         } 
         else {
             $("#FailedAssayDiv")[0].style.visibility = "visible";
         }
     });
-
-    alert("Redirect this to the assay result page!");
 }
 
 function cancel_ubc_assay() {
-    alert("Assay " + assay_id + " canceled!");
-    assay_id = 0;
+    if (assay_id > 0) {
+        alert("Assay " + assay_id + " canceled! (TODO)");
+        assay_id = 0;
+    } else {
+        alert("No assay is running right now");
+    }
 }
     
 
