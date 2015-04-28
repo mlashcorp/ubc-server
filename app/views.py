@@ -31,7 +31,7 @@ def view_assay():
 @app.route("/query_assay")
 def query_assay():
     global processed_frames
-    total_frames = 10200
+    total_frames = 600
     progress = round(float(processed_frames) / float(total_frames), 3)
 
     ## Fake: simulates progress change
@@ -42,8 +42,10 @@ def query_assay():
 # Non-visible
 @app.route("/cancel_assay")
 def cancel_assay():
-    cancel_state = 0
-    return str(cancel_state)
+    global processed_frames
+    processed_frames = 0
+    success = 0
+    return str(success) 
 
 @app.route("/upload_file", methods=['GET', 'POST'])
 def upload_file():

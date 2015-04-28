@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div id="StartAssayDiv" style="visibility:visible;">
-<button type="button" id="StartAssayButton" onclick="request_ubc_assay()">Start assay!</button>
+<div id="StartAssayDiv" style="visibility:visible;" class="center-block">
+<button type="button" class="btn btn-lg btn-primary center-block" id="StartAssayButton" onclick="request_ubc_assay()">Start assay!</button>
 </div>
 
-<div id="RunningAssayDiv" style="visibility:hidden;">
-<div id="RunnindAssayProgressDiv"></div>
-<button type="button" id="CancelAssayButton" onclick="cancel_ubc_assay()">Cancel assay!</button>
+<div id="RunningAssayDiv" style="visibility:hidden;" class="col-centered">
+<div id="RunnindAssayProgressDiv" style="width:600px"></div>
+<button type="button" id="CancelAssayButton" class="btn btn-lg btn-warning center-block" onclick="cancel_ubc_assay()">Cancel assay!</button>
 </div>
 
 <div id="FailedAssayDiv" style="visibility:hidden;">

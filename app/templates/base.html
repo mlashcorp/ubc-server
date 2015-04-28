@@ -1,18 +1,21 @@
 <html>
   <head>
-    {% if title %}
-    <title>{{ title }} - ubc</title>
-    {% else %}
-    <title>Welcome to ubc</title>
-    {% endif %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <title>ubc-server</title>
 
     <script src="/static/js/jquery.js"></script>
-
     <script src="/static/js/request_ubc.js"></script>
+
     
   </head>
   <body>
-    <div>ubc: <a href="/index">Home</a></div>
+    <div>ubc-server: <a href="/start_assay">Home</a></div>
     <hr>
     {% block content %}{% endblock %}
   </body>

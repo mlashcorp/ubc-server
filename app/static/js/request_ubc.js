@@ -18,15 +18,14 @@ function monitor_assay() {
                 window.location = "/view_assay";
             }
             else {
-                $("#RunnindAssayProgressDiv").html("<p> Please wait...  "+progress+"%</p>");
-                setTimeout(monitor_assay(), 10000);
+                $("#RunnindAssayProgressDiv").html("<p> Running assay with assay_id = "+assay_id+"</p>"+"<p> Please wait...  "+progress+"%</p>");
+                setTimeout(monitor_assay, 1000);
             }
         });
 }
 
 function request_ubc_assay() {
     $.get( "/request_assay", function( data ) {
-        alert( "Assay start requested! Received assay_id = " + data );
         assay_id = parseInt(data);        
 
         $("#StartAssayDiv")[0].style.visibility = "hidden";
@@ -43,8 +42,11 @@ function request_ubc_assay() {
 
 function cancel_ubc_assay() {
     if (assay_id > 0) {
-        alert("Assay " + assay_id + " canceled! (TODO)");
-        assay_id = 0;
+        $.get("/cancel_assay", function(data) {
+            alert("Assay " + assay_id + " canceled! (TODO)");
+            window.location("/start_assay");
+            assay_id = 0;            
+        });
     } else {
         alert("No assay is running right now");
     }
