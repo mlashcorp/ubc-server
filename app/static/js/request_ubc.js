@@ -12,12 +12,9 @@ var assay_id = 0; // Unitialized assay_id.
 function monitor_assay() {
     $.get( "/query_assay", { machine_id: machine_id, user_id : user_id })
         .done(function(data) {
-            //alert("Received progress data " + data);
-
             var progress = parseFloat(data);
 
             if (progress > 100.0) {
-                alert("Finished :D");                
                 window.location = "/view_assay";
             }
             else {
