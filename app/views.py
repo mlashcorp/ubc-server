@@ -5,24 +5,29 @@ import os
 
 
 assay_id_counter = 0
+processed_frames = 0
 
 @app.route("/request_assay")
 def request_assay():    
     global assay_id_counter
     assay_id_counter += 1
+    global processed_frames
+    processed_frames = 0
+
     return str(assay_id_counter)
 
 
 @app.route("/start_assay")
 def start_assay():
     return render_template("start_assay.html")
+    
 
 @app.route("/view_assay")
 def view_assay():
     return render_template("view_assay.html")
 
 # Non-visible 
-processed_frames = 20
+
 @app.route("/query_assay")
 def query_assay():
     global processed_frames
