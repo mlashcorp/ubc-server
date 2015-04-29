@@ -46,6 +46,11 @@ def view_assay():
     global ubc_machine
     return render_template("view_assay.html")
 
+@app.route("/running_assay")
+def running_assay():
+    global ubc_machine
+    return render_template("running_assay.html")
+
 # Non-html
 @app.route("/query_assay")
 def query_assay():
@@ -64,6 +69,9 @@ def cancel_assay():
     assay_id = request.args.get("assay_id")
 
     cancel_status = ubc_machine.cancel_assay(assay_id)
+
+    print "\n"*10 + "CANCEL REQUESTED FOR ASSAY_ID " + str(assay_id) + "with status = " + str(cancel_status) + "\n"*5
+
    
     return str(cancel_status) 
 

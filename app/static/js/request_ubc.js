@@ -7,9 +7,12 @@ var machine_id = "mach1";
 var user_id = "user123";
 
 
-var assay_id; // Unitialized assay_id.
+var assay_id = ""; // Unitialized assay_id.
+
 
 function monitor_assay() {
+    assay_id = getCookie("assay_id");
+
     $.get( "/query_assay", { machine_id: machine_id, user_id : user_id })
         .done(function(data) {
             var progress = parseFloat(data);
@@ -26,22 +29,24 @@ function monitor_assay() {
 
 function request_ubc_assay() {
     $.get( "/request_assay", function( data ) {
-        assay_id = data;        
 
-        $("#StartAssayDiv")[0].style.visibility = "hidden";
-        $("#RunningAssayDiv")[0].style.visibility = "visible";
+        assay_id = data;
+
+        setCookie("assay_id", assay_id, 1); // lasts for 1 day
+
+        window.location = "/running_assay";
+
         monitor_assay();
     });
 }
 
 function cancel_ubc_assay() {
-    $.get("/cancel_assay", { assay_id : String(assay_id) })
+    assay_id = getCookie("assay_id");
+
+    $.get("/cancel_assay", { assay_id : assay_id })
         .done(function(data) {
-            if (data == "False") {
-                alert("Assay id =" + assay_id + " cancel failed.");
-            }
-            window.location("/start_assay");
-            assay_id = 0;            
+            window.location = "/start_assay";
+            setCookie("assay_id", "", 1);
         });
 }
     
