@@ -2,17 +2,20 @@
 {% block content %}
 
 <div id="RunningAssayDiv" class="col-centered">
-<div id="RunnindAssayProgressDiv">
-<div class="text-center"><input type="text" value="75" class="knob">
-</div>
+  <div id="RunnindAssayProgressDiv"></div>
+    <div class="text-center">
+      <input id="RunningAssayProgress" type="text" value="75" value-min="40" value-max="100" class="knob">
 
-<script>
-    $(function() {
+
+    <script>
+      $(document).ready( monitor_assay() );
+
+      $(function() {
         $(".knob").knob();
-    });
-</script>
-</div>
-<button type="button" id="CancelAssayButton" class="btn btn-lg btn-warning center-block" onclick="cancel_ubc_assay()">Cancel assay!</button>
+      });
+    </script>
+  </div>
+  <button type="button" id="CancelAssayButton" class="btn btn-lg btn-warning center-block" onclick="cancel_ubc_assay()">Cancel assay!</button>
 </div>
 
 {% endblock %}

@@ -21,7 +21,10 @@ function monitor_assay() {
                 window.location = "/view_assay";
             }
             else {
-                $("#RunnindAssayProgressDiv").html("<p> Running assay with assay_id = "+assay_id+"</p>"+"<p> Please wait...  "+progress+"%</p>");
+                $("#RunnindAssayProgressDiv").html("<p> Running assay with assay_id = "+assay_id+"</p>");
+                
+                $("#RunningAssayProgress").val(String(progress)).trigger("change");
+
                 setTimeout(monitor_assay, 1000);
             }
         });
