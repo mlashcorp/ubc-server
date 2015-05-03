@@ -46,15 +46,15 @@
 }
 
 #result-top {
-	height: 22%;
+	height: 22vh;
 }
 
 #result-center {
-	height: 60%;
+	height: 60vh;
 }
 
 #result-bottom {
-	height: 20%;
+	height: 20vh;
 }
 
 .running-gui {
