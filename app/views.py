@@ -7,28 +7,6 @@ from UbcMachine import UbcMachine as UbcMachine
 
 ubc_machine = UbcMachine()
 
-import random, time
-from threading import Thread
-def fake_increment_progress_and_finish_assays_worker(ubc_machine):   
-    while True:
-        if ubc_machine.state["progress"] > 1.1:
-            result = { "result" : random.random() }
-
-            ubc_machine.store.store_assay(ubc_machine.state["assay_id"], result) # results can be a map
-            ubc_machine.state["progress"] = 0.0
-            ubc_machine.state["running_assay"] = False
-            ubc_machine.state["assay_id"] = None
-
-            print "Stored assays in ubc_machine:"
-            print ubc_machine.store.db
-
-        elif ubc_machine.state["running_assay"]:
-            ubc_machine.state["progress"] += 0.035
-
-        time.sleep(0.2)
-
-t = Thread(target=fake_increment_progress_and_finish_assays_worker, args=(ubc_machine,))
-t.start()
 
 @app.route("/request_assay")
 def request_assay():    
@@ -59,7 +37,7 @@ def query_assay():
     ## Fake: simulates progress change    
     #ubc_machine.state["progress"] += 0.05
 
-    return str( round(ubc_machine.state["progress"]*100, 1) ) # Returns a string with the progress percentage value
+    return str(round(ubc_machine.state["progress"]*100, 1) ) # Returns a string with the progress percentage value
 
 # Non-html
 @app.route("/cancel_assay")

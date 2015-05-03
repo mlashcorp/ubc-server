@@ -1,8 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div id="StartAssayDiv" style="visibility:visible;" class="center-block">
-<button type="button" class="btn btn-lg btn-primary center-block" id="StartAssayButton" onclick="request_ubc_assay()">Start assay!</button>
+<div class="row">
+<div id="banner_step_1" class= "col-md-12 banner">
+<p class= "banner-text">
+Collect blood sample
+</p>
 </div>
+
+<div id="banner_step_2" class= "col-md-12 banner">
+<p class= "banner-text">
+Place sample in cartridge
+</p>
+</div>
+
+<div id="banner_step_3" class= "col-md-12 banner">
+<p class= "banner-text">
+Seal cartridge and insert it on the device
+</p>
+</div>
+
+<div id="banner_step_4" class= "col-md-12 banner" onclick="request_ubc_assay()">
+<p class= "banner-text">
+Press here to start the assay
+</p>
+	<!--<div id="StartAssayDiv" style="visibility:visible;" class="center-block">
+<button type="button" class="btn btn-lg btn-primary center-block" id="StartAssayButton" onclick="request_ubc_assay()">Start assay!</button>
+</div>-->
+</div>
+</div>
+
 
 {% endblock %}

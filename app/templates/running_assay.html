@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div id="RunningAssayDiv" class="col-centered">
-  <div id="RunnindAssayProgressDiv"></div>
+
+<div class="row">
+
+<!--Top GUI elements-->
+<div id="running-top" class= "col-md-12 running-gui">
+
+</div>
+
+<!--Center GUI elements-->
+<div id="running-center" class= "col-md-12 running-gui">
     <div class="text-center">
-      <input id="RunningAssayProgress" type="text" value="75" value-min="40" value-max="100" class="knob">
+      <input id="RunningAssayProgress" type="text" data-bgColor="white" data-fgColor="#11EFBF" data-inputColor="white" data-width="200" data-thickness = "0.1" data-height="200" value-min="0" value-max="100" class="knob">
 
 
     <script>
@@ -14,8 +22,19 @@
         $(".knob").knob();
       });
     </script>
-  </div>
-  <button type="button" id="CancelAssayButton" class="btn btn-lg btn-warning center-block" onclick="cancel_ubc_assay()">Cancel assay!</button>
+  
 </div>
+</div>
+</div>
+
+<!--Bottom GUI elements-->
+<div id="running-bottom" class= "col-md-12 running-gui">
+<button type="button" id="CancelAssayButton" class="btn btn-lg center-block" onclick="cancel_ubc_assay()">cancel assay</button>
+
+</div>
+
+</div>
+
+
 
 {% endblock %}
