@@ -5,7 +5,6 @@ $( document ).ready(function() {
 
 var machine_id = "mach1";
 var user_id = "user123";
-   var count = 0;
 
 var assay_id = ""; // Unitialized assay_id.
 
@@ -14,7 +13,7 @@ function monitor_assay() {
     assay_id = getCookie("assay_id");
  
     //Added a useless count variable just so the queried URL changes and IE11 doesn't agressively cache pages
-    $.get( "/query_assay", { machine_id: machine_id, user_id : user_id, count: count })
+    $.get( "/query_assay", { machine_id: machine_id, user_id : user_id })
         .done(function(data) {
             var progress = parseFloat(data);
 
@@ -26,8 +25,8 @@ function monitor_assay() {
                 
                 $("#RunningAssayProgress").val(String(progress)).trigger("change");
 
+                //Calls monitor assay again in 1 seconds
                 setTimeout(monitor_assay, 1000);
-                count += 1;
             }
         });
 }
