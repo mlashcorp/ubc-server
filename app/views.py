@@ -27,7 +27,7 @@ def request_assay():
     global ubc_machine
     return str(ubc_machine.start_new_assay())
 
-
+@app.route("/")
 @app.route("/start_assay")
 @nocache
 def start_assay():
